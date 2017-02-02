@@ -1,0 +1,82 @@
+
+<!-- table zwave_devices search -->
+<div>
+ <a href="#" class="btn btn-primary" onClick="$('#api_settings').toggle();return false;"><#LANG_SETUP#></a>
+</div>
+<div style="display:none" id='api_settings'>
+&nbsp;
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+<fieldset>
+<div class="form-group">
+ <label class="control-label"[#if ERR_API#] style="color:red;font-weight:bold"[#endif#]>
+ API:
+ </label>
+ <div class="controls">
+ <input type="radio" name="api" value="win"[#if API="" || API=="win"#] checked[#endif#]> Windows
+ &nbsp;&nbsp;&nbsp;
+ <input type="radio" name="api" value="lin"[#if API=="lin"#] checked[#endif#]> Linux
+ </div>
+</div>
+<div class="form-actions">
+<button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_UPDATE#></button>
+<input type="hidden" name="view_mode" value="update_settings">
+<input type="hidden" name="mode" value="update">
+</div>
+</fieldset>
+</form>
+</div><br>
+ <!-- action usual -->
+ [#if DATA_SOURCE="dev_integra_devices" || DATA_SOURCE=""#]
+ <!-- table dev_integra_devices search -->
+ [#if VIEW_MODE="search_dev_integra_devices" || VIEW_MODE=""#]
+  [#inc dev_integra_devices_search_admin.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_devices search -->
+ <!-- table dev_integra_devices edit -->
+ [#if VIEW_MODE="edit_dev_integra_devices"#]
+   [#if ID!=""#]
+   [#if TITLE!=""#]<h4>[#TITLE#]</h4>[#endif TITLE#]
+<ul class="nav nav-tabs">
+  <li[#if TAB=""#] class="active"[#endif#]>
+   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab="><#LANG_GENERAL#></a>
+  </li>
+  <li[#if TAB="data"#] class="active"[#endif#]>
+   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=data">&#060#LANG_DATA#&#062</a>
+  </li>
+</ul>
+&nbsp;<br/>
+   [#endif ID#]
+   [#if TAB=""#]
+    [#inc dev_integra_devices_edit_default.html#]
+   [#endif TAB#]
+   [#if TAB="data"#]
+    [#inc dev_integra_devices_edit_data.html#]
+   [#endif TAB#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_devices edit -->
+ <!-- table dev_integra_devices view --> 
+ [#if VIEW_MODE="view_dev_integra_devices"#]
+   [#if TAB=""#]
+    [#inc dev_integra_devices_view_default.html#]
+   [#endif TAB#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_devices view -->
+ [#endif DATA_SOURCE#]
+ <!-- action usual -->
+ [#if DATA_SOURCE="dev_integra_commands"#]
+ <!-- table dev_integra_commands search -->
+ [#if VIEW_MODE="search_dev_integra_commands" || VIEW_MODE=""#]
+  [#inc dev_integra_commands_search_admin.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_commands search -->
+ <!-- table dev_integra_commands edit -->
+ [#if VIEW_MODE="edit_dev_integra_commands"#]
+   [#inc dev_integra_commands_edit.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_commands edit -->
+ <!-- table dev_integra_commands view --> 
+ [#if VIEW_MODE="view_dev_integra_commands"#]
+   [#inc dev_integra_commands_view.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table dev_integra_commands view -->
+ [#endif DATA_SOURCE#]
